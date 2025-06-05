@@ -1,0 +1,14 @@
+{
+  "projects": [
+    { "id": "inbox", "name": "Inbox" },
+    { "id": "work", "name": "Work" },
+    { "id": "personal", "name": "Personal" }
+  ],
+  "tasks": [
+    { "id": "task-1", "title": "Grocery Shopping", "description": "Buy milk, eggs, and bread", "dueDate": "2024-07-28", "isCompleted": false, "projectId": "personal", "priority": "high" },
+    { "id": "task-2", "title": "Prepare presentation", "description": "For Monday's meeting", "dueDate": "2024-07-29", "isCompleted": false, "projectId": "work", "priority": "high" },
+    { "id": "task-3", "title": "Read a book", "description": "", "dueDate": "2024-07-28", "isCompleted": true, "projectId": "personal", "priority": "medium" },
+    { "id": "task-4", "title": "Reply to emails", "description": "Clear out inbox", "dueDate": "2024-07-27", "isCompleted": false, "projectId": "inbox", "priority": "low" },
+    { "id": "task-5", "title": "Team meeting", "description": "Discuss project progress", "dueDate": "2024-07-29", "isCompleted": false, "projectId": "work", "priority": "medium" }
+  ]
+}
