@@ -82,7 +82,7 @@ public class JobServlet extends HttpServlet {
             Job job = new Job();
             job.setJobId(jobId);
             job.setJobHiringnum(jobHiringnum);
-            job.setJobEnddate(jobEnddate);
+            job.setJobEndtime(jobEnddate);
             job.setJobState(jobState);
             Company company = new Company();
             company.setCompanyId(companyId);

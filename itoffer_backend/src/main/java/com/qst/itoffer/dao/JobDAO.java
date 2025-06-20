@@ -45,7 +45,7 @@ public class JobDAO {
                 job.setJobId(rs.getInt("job_id"));
                 job.setJobName(rs.getString("job_name"));
                 job.setJobHiringnum(rs.getInt("job_hiringnum"));
-                job.setJobEnddate(rs.getTimestamp("job_endtime"));
+                job.setJobEndtime(rs.getTimestamp("job_endtime"));
                 job.setJobState(rs.getInt("job_state"));
                 Company company = new Company();
                 company.setCompanyId(rs.getInt("company_id"));
@@ -91,7 +91,7 @@ public class JobDAO {
                 job.setJobId(rs.getInt("job_id"));
                 job.setJobName(rs.getString("job_name"));
                 job.setJobHiringnum(rs.getInt("job_hiringnum"));
-                job.setJobEnddate(rs.getTimestamp("job_endtime"));
+                job.setJobEndtime(rs.getTimestamp("job_endtime"));
                 job.setJobState(rs.getInt("job_state"));
                 Company company = new Company();
                 company.setCompanyId(rs.getInt("company_id"));
@@ -186,7 +186,7 @@ public class JobDAO {
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, job.getJobName());
             pstmt.setInt(2, job.getJobHiringnum());
-            pstmt.setTimestamp(3, job.getJobEnddate());
+            pstmt.setTimestamp(3, job.getJobEndtime());
             pstmt.setInt(4, job.getJobState());
             pstmt.setInt(5, job.getCompany().getCompanyId());
             pstmt.setInt(6, job.getJobId());

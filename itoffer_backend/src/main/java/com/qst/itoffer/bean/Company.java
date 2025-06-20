@@ -1,39 +1,40 @@
 package com.qst.itoffer.bean;
 
 /**
- * 企业信息JavaBean
+ * Represents an enterprise entity in the system.
+ * Contains company profile, status, and related information.
  */
 public class Company {
-    // 企业标识
+    // Company ID
     private int companyId;
-    // 企业名称
+    // Company name
     private String companyName;
-    // 企业所在地区
+    // Company area
     private String companyArea;
-    // 企业规模
+    // Company size
     private String companySize;
-    // 企业性质
+    // Company type
     private String companyType;
-    // 企业简介
+    // Company brief/introduction
     private String companyBrief;
-    // 招聘状态:1招聘中 2已暂停 3已结束
+    // Company recruitment status (1: recruiting, 2: paused, 3: closed)
     private int companyState;
-    // 排序序号
+    // Sort order
     private int companySort;
-    //浏览数
+    // View count
     private int companyViewnum;
-    // 宣传图片
+    // Company picture
     private String companyPic;
 
+    /**
+     * Default constructor.
+     */
+    public Company() {}
 
-    public Company() {
-        super();
-    }
-
-    public Company(String companyName, String companyArea,
-                   String companySize, String companyType, String companyBrief,
-                   int companyState, int companySort,int companyViewnum,String companyPic) {
-        super();
+    /**
+     * Constructor for creating a company with all fields except ID.
+     */
+    public Company(String companyName, String companyArea, String companySize, String companyType, String companyBrief, int companyState, int companySort, int companyViewnum, String companyPic) {
         this.companyName = companyName;
         this.companyArea = companyArea;
         this.companySize = companySize;
@@ -45,11 +46,10 @@ public class Company {
         this.companyPic = companyPic;
     }
 
-    public Company(int companyId, String companyName, String companyArea,
-                   String companySize, String companyType, String companyBrief,
-                   int companyState, int companySort, int companyViewnum,
-                   String companyPic) {
-        super();
+    /**
+     * Full constructor including companyId.
+     */
+    public Company(int companyId, String companyName, String companyArea, String companySize, String companyType, String companyBrief, int companyState, int companySort, int companyViewnum, String companyPic) {
         this.companyId = companyId;
         this.companyName = companyName;
         this.companyArea = companyArea;
@@ -62,84 +62,103 @@ public class Company {
         this.companyPic = companyPic;
     }
 
-    public int getCompanyId() {
-        return companyId;
-    }
+    /**
+     * Gets the company ID.
+     */
+    public int getCompanyId() { return companyId; }
 
-    public void setCompanyId(int companyId) {
-        this.companyId = companyId;
-    }
+    /**
+     * Sets the company ID.
+     */
+    public void setCompanyId(int companyId) { this.companyId = companyId; }
 
-    public String getCompanyName() {
-        return companyName;
-    }
+    /**
+     * Gets the company name.
+     */
+    public String getCompanyName() { return companyName; }
 
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
+    /**
+     * Sets the company name.
+     */
+    public void setCompanyName(String companyName) { this.companyName = companyName; }
 
-    public String getCompanyArea() {
-        return companyArea;
-    }
+    /**
+     * Gets the company area.
+     */
+    public String getCompanyArea() { return companyArea; }
 
-    public void setCompanyArea(String companyArea) {
-        this.companyArea = companyArea;
-    }
+    /**
+     * Sets the company area.
+     */
+    public void setCompanyArea(String companyArea) { this.companyArea = companyArea; }
 
-    public String getCompanySize() {
-        return companySize;
-    }
+    /**
+     * Gets the company size.
+     */
+    public String getCompanySize() { return companySize; }
 
-    public void setCompanySize(String companySize) {
-        this.companySize = companySize;
-    }
+    /**
+     * Sets the company size.
+     */
+    public void setCompanySize(String companySize) { this.companySize = companySize; }
 
-    public String getCompanyType() {
-        return companyType;
-    }
+    /**
+     * Gets the company type.
+     */
+    public String getCompanyType() { return companyType; }
 
-    public void setCompanyType(String companyType) {
-        this.companyType = companyType;
-    }
+    /**
+     * Sets the company type.
+     */
+    public void setCompanyType(String companyType) { this.companyType = companyType; }
 
-    public String getCompanyBrief() {
-        return companyBrief;
-    }
+    /**
+     * Gets the company brief/introduction.
+     */
+    public String getCompanyBrief() { return companyBrief; }
 
-    public void setCompanyBrief(String companyBrief) {
-        this.companyBrief = companyBrief;
-    }
+    /**
+     * Sets the company brief/introduction.
+     */
+    public void setCompanyBrief(String companyBrief) { this.companyBrief = companyBrief; }
 
-    public int getCompanyState() {
-        return companyState;
-    }
+    /**
+     * Gets the company recruitment status.
+     */
+    public int getCompanyState() { return companyState; }
 
-    public void setCompanyState(int companyState) {
-        this.companyState = companyState;
-    }
+    /**
+     * Sets the company recruitment status.
+     */
+    public void setCompanyState(int companyState) { this.companyState = companyState; }
 
-    public int getCompanySort() {
-        return companySort;
-    }
+    /**
+     * Gets the sort order.
+     */
+    public int getCompanySort() { return companySort; }
 
-    public void setCompanySort(int companySort) {
-        this.companySort = companySort;
-    }
+    /**
+     * Sets the sort order.
+     */
+    public void setCompanySort(int companySort) { this.companySort = companySort; }
 
-    public int getCompanyViewnum() {
-        return companyViewnum;
-    }
+    /**
+     * Gets the view count.
+     */
+    public int getCompanyViewnum() { return companyViewnum; }
 
-    public void setCompanyViewnum(int companyViewnum) {
-        this.companyViewnum = companyViewnum;
-    }
+    /**
+     * Sets the view count.
+     */
+    public void setCompanyViewnum(int companyViewnum) { this.companyViewnum = companyViewnum; }
 
-    public String getCompanyPic() {
-        return companyPic;
-    }
+    /**
+     * Gets the company picture.
+     */
+    public String getCompanyPic() { return companyPic; }
 
-    public void setCompanyPic(String companyPic) {
-        this.companyPic = companyPic;
-    }
-
+    /**
+     * Sets the company picture.
+     */
+    public void setCompanyPic(String companyPic) { this.companyPic = companyPic; }
 }
