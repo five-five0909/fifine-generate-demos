@@ -2,8 +2,6 @@ package com.qst.itoffer.bean;
 
 /**
  * 企业信息JavaBean
- * @公司 青软实训
- * @作者 fengjj
  */
 public class Company {
     // 企业标识

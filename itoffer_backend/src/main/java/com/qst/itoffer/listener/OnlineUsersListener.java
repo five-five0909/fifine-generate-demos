@@ -12,8 +12,6 @@ import com.qst.itoffer.bean.User;
 
 /**
  * 在线用户监听器
- * @公司 青软实训
- * @作者 fengjj
  */
 @WebListener
 public class OnlineUsersListener implements HttpSessionAttributeListener {

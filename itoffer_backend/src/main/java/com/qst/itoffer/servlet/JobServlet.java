@@ -16,8 +16,6 @@ import com.qst.itoffer.bean.Company;
 import com.qst.itoffer.bean.Job;
 /**
  * 职位信息处理Servlet
- * @公司 青软实训
- * @作者 fengjj
  */
 @WebServlet("/JobServlet")
 public class JobServlet extends HttpServlet {
@@ -54,6 +52,43 @@ public class JobServlet extends HttpServlet {
             request.setAttribute("companylist", companylist);
             request.getRequestDispatcher("manage/jobList.jsp").forward(request,
                     response);
+            return;
+        }else if("delete".equals(type)){
+            // 删除职位
+            int jobId = Integer.parseInt(request.getParameter("jobId"));
+            if(jobdao.hasApply(jobId)) {
+                response.getWriter().write("hasApply");
+                return;
+            }
+            boolean result = jobdao.delete(jobId);
+            response.getWriter().write(result ? "success" : "fail");
+            return;
+        }else if("update".equals(type)){
+            // 修改职位（只允许招聘数、结束日期、招聘状态、companyId）
+            int jobId = Integer.parseInt(request.getParameter("jobId"));
+            String hiringnumStr = request.getParameter("jobHiringnum");
+            String enddateStr = request.getParameter("jobEnddate");
+            String stateStr = request.getParameter("jobState");
+            String companyIdStr = request.getParameter("companyId");
+            if(hiringnumStr==null || enddateStr==null || stateStr==null || companyIdStr==null
+                || hiringnumStr.isEmpty() || enddateStr.isEmpty() || stateStr.isEmpty() || companyIdStr.isEmpty()) {
+                response.getWriter().write("fail");
+                return;
+            }
+            int jobHiringnum = Integer.parseInt(hiringnumStr);
+            java.sql.Timestamp jobEnddate = java.sql.Timestamp.valueOf(enddateStr);
+            int jobState = Integer.parseInt(stateStr);
+            int companyId = Integer.parseInt(companyIdStr);
+            Job job = new Job();
+            job.setJobId(jobId);
+            job.setJobHiringnum(jobHiringnum);
+            job.setJobEnddate(jobEnddate);
+            job.setJobState(jobState);
+            Company company = new Company();
+            company.setCompanyId(companyId);
+            job.setCompany(company);
+            boolean result = jobdao.update(job);
+            response.getWriter().write(result ? "success" : "fail");
             return;
         }
     }

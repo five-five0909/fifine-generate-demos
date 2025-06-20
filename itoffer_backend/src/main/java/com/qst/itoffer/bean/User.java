@@ -2,8 +2,6 @@ package com.qst.itoffer.bean;
 
 /**
  * 后台管理用户JavaBean
- * @公司 青软实训
- * @作者 fengjj
  */
 public class User {
 

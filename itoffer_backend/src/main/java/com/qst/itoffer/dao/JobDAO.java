@@ -12,8 +12,6 @@ import com.qst.itoffer.bean.Job;
 import com.qst.itoffer.util.DBUtil;
 /**
  * 职位信息数据库操作类
- * @公司 青软实训
- * @作者 fengjj
  */
 public class JobDAO {
     /**
@@ -131,5 +129,74 @@ public class JobDAO {
             DBUtil.closeJDBC(rs, pstmt, conn);
         }
         return list;
+    }
+    /**
+     * 判断职位是否有投递
+     */
+    public boolean hasApply(int jobId) {
+        Connection conn = DBUtil.getConnection();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        boolean has = false;
+        try {
+            String sql = "SELECT COUNT(*) FROM tb_jobapply WHERE job_id=?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, jobId);
+            rs = pstmt.executeQuery();
+            if(rs.next() && rs.getInt(1) > 0) {
+                has = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeJDBC(rs, pstmt, conn);
+        }
+        return has;
+    }
+    /**
+     * 根据职位ID删除职位（有投递则不允许删除）
+     */
+    public boolean delete(int jobId) {
+        if(hasApply(jobId)) return false;
+        Connection conn = DBUtil.getConnection();
+        PreparedStatement pstmt = null;
+        boolean result = false;
+        try {
+            String sql = "DELETE FROM tb_job WHERE job_id=?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, jobId);
+            int rows = pstmt.executeUpdate();
+            result = rows > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeJDBC(null, pstmt, conn);
+        }
+        return result;
+    }
+    /**
+     * 修改职位信息（这里只做简单示例，实际可根据需要扩展字段）
+     */
+    public boolean update(Job job) {
+        Connection conn = DBUtil.getConnection();
+        PreparedStatement pstmt = null;
+        boolean result = false;
+        try {
+            String sql = "UPDATE tb_job SET job_name=?, job_hiringnum=?, job_endtime=?, job_state=?, company_id=? WHERE job_id=?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, job.getJobName());
+            pstmt.setInt(2, job.getJobHiringnum());
+            pstmt.setTimestamp(3, job.getJobEnddate());
+            pstmt.setInt(4, job.getJobState());
+            pstmt.setInt(5, job.getCompany().getCompanyId());
+            pstmt.setInt(6, job.getJobId());
+            int rows = pstmt.executeUpdate();
+            result = rows > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeJDBC(null, pstmt, conn);
+        }
+        return result;
     }
 }

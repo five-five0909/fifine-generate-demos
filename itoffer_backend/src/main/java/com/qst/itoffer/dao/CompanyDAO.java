@@ -11,8 +11,6 @@ import com.qst.itoffer.bean.Company;
 import com.qst.itoffer.util.DBUtil;
 /**
  * 企业信息数据库操作类
- * @公司 青软实训
- * @作者 fengjj
  */
 public class CompanyDAO {
     /**
@@ -139,5 +137,48 @@ public class CompanyDAO {
         }
         return list;
     }
-
+    /**
+     * 判断企业下是否有职位
+     */
+    public boolean hasJob(int companyId) {
+        Connection conn = DBUtil.getConnection();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        boolean has = false;
+        try {
+            String sql = "SELECT COUNT(*) FROM tb_job WHERE company_id=?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, companyId);
+            rs = pstmt.executeQuery();
+            if(rs.next() && rs.getInt(1) > 0) {
+                has = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeJDBC(rs, pstmt, conn);
+        }
+        return has;
+    }
+    /**
+     * 删除企业（有职位则不允许删除）
+     */
+    public boolean delete(int companyId) {
+        if(hasJob(companyId)) return false;
+        Connection conn = DBUtil.getConnection();
+        PreparedStatement pstmt = null;
+        boolean result = false;
+        try {
+            String sql = "DELETE FROM tb_company WHERE company_id=?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, companyId);
+            int rows = pstmt.executeUpdate();
+            result = rows > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeJDBC(null, pstmt, conn);
+        }
+        return result;
+    }
 }

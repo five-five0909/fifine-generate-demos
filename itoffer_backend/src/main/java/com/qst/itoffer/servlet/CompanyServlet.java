@@ -15,11 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-
 /**
  * 企业信息管理Servlet
- * @公司 青软实训
- * @作者 fengjj
  */
 @WebServlet("/CompanyServlet")
 @MultipartConfig
@@ -81,6 +78,15 @@ public class CompanyServlet extends HttpServlet {
 			Company company = new Company(companyId,companyName,companyArea,companySize,companyType,companyBrief,companyState,companySort,companyViewnum,fileName);
 			dao.update(company);
 			response.sendRedirect("CompanyServlet?type=list");
+		}else if("delete".equals(type)){
+			int companyId = Integer.parseInt(request.getParameter("companyId"));
+			if(dao.hasJob(companyId)) {
+				response.getWriter().write("hasJob");
+				return;
+			}
+			boolean result = dao.delete(companyId);
+			response.getWriter().write(result ? "success" : "fail");
+			return;
 		}
 	}
 

@@ -1,10 +1,9 @@
 package com.qst.itoffer.bean;
 
+import java.sql.Timestamp;
 import java.util.Date;
 /**
- * 职位信息JavaBean
- * @公司 青软实训
- * @作者 fengjj
+ * 
  */
 public class Job {
 	// 职位编号
@@ -103,8 +102,8 @@ public class Job {
 		this.jobDesc = jobDesc;
 	}
 
-	public Date getJobEnddate() {
-		return jobEnddate;
+	public Timestamp getJobEnddate() {
+		return (Timestamp) jobEnddate;
 	}
 
 	public void setJobEnddate(Date jobEnddate) {

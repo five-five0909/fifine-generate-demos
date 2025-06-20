@@ -6,8 +6,6 @@ import java.util.List;
 import com.qst.itoffer.dao.UserDAO;
 /**
  * 用户列表分页JavaBean
- * @公司 青软实训
- * @作者 fengjj
  */
 public class UserPageBean {
 	// 每页显示记录数

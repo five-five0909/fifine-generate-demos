@@ -17,9 +17,7 @@ import com.qst.itoffer.bean.Company;
 import com.qst.itoffer.bean.Job;
 import com.qst.itoffer.bean.JobApply;
 /**
- * 职位申请管理Servlet
- * @公司 青软实训
- * @作者 fengjj
+ * 
  */
 @WebServlet("/JobApplyServlet")
 public class JobApplyServlet extends HttpServlet {
@@ -63,6 +61,19 @@ public class JobApplyServlet extends HttpServlet {
                     dao.query(companyId,jobId,startDate,endDate);
             ObjectMapper mapper = new ObjectMapper();
             mapper.writeValue(response.getWriter(),applylist);
+        }else if("audit".equals(type)){
+            // 职位申请审核（通过/拒绝）
+            int applyId = Integer.parseInt(request.getParameter("applyId"));
+            int state = Integer.parseInt(request.getParameter("state")); // 1=通过, 2=拒绝
+            JobApplyDAO dao = new JobApplyDAO();
+            boolean result = dao.updateApplyState(applyId, state);
+            response.getWriter().write(result ? "success" : "fail");
+        }else if("interview".equals(type)){
+            // 面试通知（状态设为3，实际可根据需求调整）
+            int applyId = Integer.parseInt(request.getParameter("applyId"));
+            JobApplyDAO dao = new JobApplyDAO();
+            boolean result = dao.updateApplyState(applyId, 3); // 3=面试通知
+            response.getWriter().write(result ? "success" : "fail");
         }
     }
 }

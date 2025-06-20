@@ -58,6 +58,26 @@ function queryJob(companyElem){
 	}
 	});
 }
+function auditApply(applyId, state) {
+	$.post("../JobApplyServlet", {type: "audit", applyId: applyId, state: state}, function(res) {
+		if(res === "success") {
+			alert("审核操作成功");
+			query();
+		} else {
+			alert("审核操作失败");
+		}
+	});
+}
+function interviewApply(applyId) {
+	$.post("../JobApplyServlet", {type: "interview", applyId: applyId}, function(res) {
+		if(res === "success") {
+			alert("面试通知已发送");
+			query();
+		} else {
+			alert("面试通知失败");
+		}
+	});
+}
 function query(){
 	var companyId = document.getElementById("companyId").value;
 	var jobId = document.getElementById("jobId").value;
@@ -77,7 +97,20 @@ function query(){
 			if(json[i].applyState == 3)
 				str += "<td height='50px'>通知</td>";
 			str += "<td height='50px'>" + (new Date(json[i].applyDate)).toLocaleString() + "</td>";
-			str += "<td height='50px'><a href='#' class='tablelink'>申请审核</a> &nbsp;&nbsp;<a href='#' class='tablelink'>面试通知</a></td></tr>";
+			str += "<td height='50px'>";
+			// 只有申请状态为1时，审核按钮可用
+			if(json[i].applyState == 1) {
+				str += "<a href='javascript:void(0);' class='tablelink' onclick='auditApply("+json[i].applyId+",2)'>申请审核</a> &nbsp;&nbsp;";
+			} else {
+				str += "<span style=\"color:gray;cursor:not-allowed;\">申请审核</span> &nbsp;&nbsp;";
+			}
+			// 只有申请状态为2时，面试通知按钮可用
+			if(json[i].applyState == 2) {
+				str += "<a href='javascript:void(0);' class='tablelink' onclick='interviewApply("+json[i].applyId+")'>面试通知</a>";
+			} else {
+				str += "<span style=\"color:gray;cursor:not-allowed;\">面试通知</span>";
+			}
+			str += "</td></tr>";
 		}
 		$("#viewData").html(str);
 		/*//服务器端响应回的JSON示例 
@@ -88,7 +121,7 @@ function query(){
 			"applyDate":1425484800000,"applyState":1,
 			"job":{"jobId":1,"company":null,"jobName":"对日软件开发工程师（提供岗前培训）","jobHiringnum":0,"jobSalary":null,"jobArea":null,"jobDesc":null,"jobEnddate":null,"jobState":0,"applyNum":0}}]
  		*/
- });
+	});
 }
 </script>
 </head>

@@ -4,8 +4,6 @@ import java.util.Date;
 
 /**
  * 求职者信息JavaBean
- * @公司 青软实训
- * @作者 fengjj
  */
 public class Applicant {
 	// 求职者标识

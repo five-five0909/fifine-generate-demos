@@ -16,9 +16,7 @@ import com.qst.itoffer.dao.CompanyDAO;
 import com.qst.itoffer.bean.Company;
 
 /**
- * 企业信息添加Servlet
- * @公司 青软实训
- * @作者 fengjj
+ * 
  */
 @WebServlet("/CompanyAddServlet")
 @MultipartConfig

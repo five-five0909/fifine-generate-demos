@@ -12,8 +12,6 @@ import com.qst.itoffer.dao.UserDAO;
 
 /**
  * 用户信息添加Servlet
- * @公司 青软实训
- * @作者 fengjj
  */
 @WebServlet("/UserAddServlet")
 public class UserAddServlet extends HttpServlet {

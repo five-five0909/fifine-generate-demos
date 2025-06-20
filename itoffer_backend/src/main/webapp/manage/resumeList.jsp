@@ -10,6 +10,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>简历列表</title>
 <link href="css/manageadmin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/jquery-2.1.3.min.js"></script>
+<script type="text/javascript">
+$(function(){
+    // 全选/反选
+    $("#checkAll").on("change", function(){
+        $(".rowCheck").prop("checked", this.checked);
+    });
+    $(document).on("change", ".rowCheck", function(){
+        var all = $(".rowCheck").length;
+        var checked = $(".rowCheck:checked").length;
+        $("#checkAll").prop("checked", all === checked);
+    });
+});
+</script>
 </head>
 <body>
 <div class="place"> <span>位置：</span>
@@ -27,7 +41,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <table class="imgtable">
     <thead>
       <tr>
-        <th ><input name="" type="checkbox" value="" checked="checked"/></th>
+        <th ><input id="checkAll" type="checkbox" /></th>
         <th>姓名</th>
         <th>手机</th>
         <th>Email</th>
@@ -39,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <tbody>
      <c:forEach items="${requestScope.pageBean.pageData}" var="resume">
       <tr height="50px">
-        <td ><input name="" type="checkbox" value="" /></td>
+        <td ><input class="rowCheck" type="checkbox" value="${resume.basicinfoId}" /></td>
         <td>${resume.realName}</td>
         <td>${resume.telephone}</td>
         <td>${resume.email}</td>

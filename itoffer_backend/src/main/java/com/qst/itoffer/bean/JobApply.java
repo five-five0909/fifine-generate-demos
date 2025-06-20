@@ -2,9 +2,7 @@ package com.qst.itoffer.bean;
 
 import java.util.Date;
 /**
- * 职位申请JavaBean
- * @公司 青软实训
- * @作者 fengjj
+ * 
  */
 public class JobApply {
 	private int applyId;

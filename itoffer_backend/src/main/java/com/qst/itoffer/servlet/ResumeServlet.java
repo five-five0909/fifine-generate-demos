@@ -14,9 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.qst.itoffer.bean.PageBean;
 /**
- * 简历信息管理Servlet
- * @公司 青软实训
- * @作者 fengjj
+ * 
  */
 @WebServlet("/ResumeServlet")
 public class ResumeServlet extends HttpServlet {

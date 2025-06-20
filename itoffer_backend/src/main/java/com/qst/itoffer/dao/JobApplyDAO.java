@@ -15,8 +15,6 @@ import com.qst.itoffer.util.DBUtil;
 
 /**
  * 职位申请信息数据库操作类
- * @公司 青软实训
- * @作者 fengjj
  */
 public class JobApplyDAO {
     public List<JobApply> query(String companyId, String jobId,
@@ -70,5 +68,25 @@ public class JobApplyDAO {
             DBUtil.closeJDBC(rs, stmt, conn);
         }
         return list;
+    }
+
+    /**
+     * 更新职位申请的状态（如审核、面试通知等）
+     */
+    public boolean updateApplyState(int applyId, int state) {
+        Connection conn = DBUtil.getConnection();
+        Statement stmt = null;
+        boolean result = false;
+        try {
+            stmt = conn.createStatement();
+            String sql = "UPDATE tb_jobapply SET apply_state=" + state + " WHERE apply_id=" + applyId;
+            int rows = stmt.executeUpdate(sql);
+            result = rows > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeJDBC(null, stmt, conn);
+        }
+        return result;
     }
 }

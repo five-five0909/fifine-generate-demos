@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>用户查询列表</title>
 <link href="../css/manageadmin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/jquery-2.1.3.min.js"></script>
 <script type="text/javascript"> 
 function confirmDel(param)
 {
@@ -15,6 +16,17 @@ document.location="../UserServlet?type=deleteSelect&userId="+param;
 	return false;
 }
 }  
+$(function(){
+    // 全选/反选
+    $("#checkAll").on("change", function(){
+        $(".rowCheck").prop("checked", this.checked);
+    });
+    $(document).on("change", ".rowCheck", function(){
+        var all = $(".rowCheck").length;
+        var checked = $(".rowCheck:checked").length;
+        $("#checkAll").prop("checked", all === checked);
+    });
+});
 </script>
 </head>
 
@@ -49,7 +61,7 @@ document.location="../UserServlet?type=deleteSelect&userId="+param;
   <table class="imgtable">
     <thead>
       <tr>
-        <th ><input name="" type="checkbox" value="" checked="checked"/></th>
+        <th ><input id="checkAll" type="checkbox" /></th>
         <th>用户登录名</th>
         <th>用户真实姓名</th>
         <th>用户Email</th>
@@ -65,7 +77,7 @@ document.location="../UserServlet?type=deleteSelect&userId="+param;
             for(User user : list){
     %>
       <tr height="50px">
-        <td ><input name="" type="checkbox" value="" /></td>
+        <td ><input class="rowCheck" type="checkbox" value="<%=user.getUserId()%>" /></td>
         <td><%=user.getUserLogname() %></td>
         <td><%=user.getUserRealname() %></td>
         <td><%=user.getUserEmail() %></td>

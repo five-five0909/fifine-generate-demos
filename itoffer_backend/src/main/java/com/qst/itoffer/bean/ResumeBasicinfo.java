@@ -1,9 +1,7 @@
 package com.qst.itoffer.bean;
 import java.util.Date;
 /**
- * 简历信息JavaBean
- * @公司 青软实训
- * @作者 fengjj
+ * 
  */
 public class ResumeBasicinfo {
 	// 简历标识

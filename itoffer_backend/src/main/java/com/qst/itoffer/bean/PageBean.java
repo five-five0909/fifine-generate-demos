@@ -3,9 +3,7 @@ package com.qst.itoffer.bean;
 import java.util.ArrayList;
 import java.util.List;
 /**
- * 用户列表分页JavaBean
- * @公司 青软实训
- * @作者 fengjj
+ * 
  */
 public class PageBean<T> {
     // 每页显示记录数

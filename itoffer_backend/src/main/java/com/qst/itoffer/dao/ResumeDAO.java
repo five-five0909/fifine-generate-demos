@@ -12,8 +12,6 @@ import com.qst.itoffer.bean.User;
 import com.qst.itoffer.util.DBUtil;
 /**
  * 简历信息数据库操作类
- * @公司 青软实训
- * @作者 fengjj
  */
 public class ResumeDAO {
     /**

@@ -17,8 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 /**
  * 用户访问权限过滤器
- * @公司 青软实训
- * @作者 fengjj
  */
 @WebFilter(
 		urlPatterns = { "/manage/*" },

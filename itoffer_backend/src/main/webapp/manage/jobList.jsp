@@ -11,6 +11,57 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <title>职位列表</title>
 
 <link href="css/manageadmin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
+<script type="text/javascript">
+function deleteJob(jobId) {
+    if(confirm("确定要删除该职位吗？")) {
+        $.post("../JobServlet", {type: "delete", jobId: jobId}, function(res) {
+            if(res === "success") {
+                alert("删除成功");
+                location.reload();
+            } else if(res === "hasApply") {
+                alert("该职位已有投递，不能删除！");
+            } else {
+                alert("删除失败");
+            }
+        });
+    }
+}
+function updateJobDialog(jobId, jobHiringnum, jobEnddate, jobState, companyId) {
+    var html = '<div id="updateJobDiv" style="background:#fff;padding:20px;border:1px solid #ccc;position:fixed;top:20%;left:40%;z-index:9999;">'
+        + '<h3>修改职位</h3>'
+        + '招聘数：<input id="editJobHiringnum" type="number" value="'+jobHiringnum+'"/><br/>'
+        + '结束日期：<input id="editJobEnddate" value="'+jobEnddate+'"/><br/>'
+        + '状态：<select id="editJobState">'
+        + '<option value="1"'+(jobState==1?' selected':'')+'>招聘中</option>'
+        + '<option value="2"'+(jobState==2?' selected':'')+'>已暂停</option>'
+        + '<option value="3"'+(jobState==3?' selected':'')+'>已结束</option>'
+        + '</select><br/>'
+        + '<input type="hidden" id="editCompanyId" value="'+companyId+'"/>'
+        + '<button onclick="submitUpdateJob('+jobId+')">提交</button>'
+        + '<button onclick="$(\'#updateJobDiv\').remove()">取消</button>'
+        + '</div>';
+    $("body").append(html);
+}
+function submitUpdateJob(jobId) {
+    $.post("../JobServlet", {
+        type: "update",
+        jobId: jobId,
+        jobHiringnum: $("#editJobHiringnum").val(),
+        jobEnddate: $("#editJobEnddate").val(),
+        jobState: $("#editJobState").val(),
+        companyId: $("#editCompanyId").val()
+    }, function(res) {
+        if(res === "success") {
+            alert("修改成功");
+            location.reload();
+        } else {
+            alert("修改失败");
+        }
+        $("#updateJobDiv").remove();
+    });
+}
+</script>
 </head>
 <body>
 <div class="place"> <span>位置：</span>
@@ -51,8 +102,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <td><c:if test="${job.jobState == 1}">招聘中  </c:if>
         <c:if test="${job.jobState == 2}">已暂停</c:if>
         <c:if test="${job.jobState == 3}">已结束</c:if></td>
-        <td ><a href="#" class="tablelink">修改</a> &nbsp;&nbsp;
-        <a href="#" class="tablelink"> 删除</a></td>
+        <td >
+            <a href="javascript:void(0);" class="tablelink" onclick="updateJobDialog('${job.jobId}','${job.jobHiringnum}','${job.jobEnddate}','${job.jobState}','${job.company.companyId}')">修改</a> &nbsp;&nbsp;
+            <c:choose>
+                <c:when test="${job.applyNum == 0}">
+                    <a href="javascript:void(0);" class="tablelink" onclick="deleteJob('${job.jobId}')"> 删除</a>
+                </c:when>
+                <c:otherwise>
+                    <span style="color:gray;cursor:not-allowed;">删除</span>
+                </c:otherwise>
+            </c:choose>
+        </td>
       </tr>
       </c:forEach>
     </tbody>

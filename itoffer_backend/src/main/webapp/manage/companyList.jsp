@@ -14,6 +14,38 @@ List<Company> list  = (List<Company>)request.getAttribute("list");
 <title>企业列表</title>
 
 <link href="css/manageadmin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
+<script type="text/javascript">
+function deleteCompany(companyId, hasJob) {
+    if(hasJob) {
+        alert("该企业下有职位，不能删除！");
+        return;
+    }
+    if(confirm("确定要删除该企业吗？")) {
+        $.post("CompanyServlet", {type: "delete", companyId: companyId}, function(res) {
+            if(res === "success") {
+                alert("删除成功");
+                location.reload();
+            } else if(res === "hasJob") {
+                alert("该企业下有职位，不能删除！");
+            } else {
+                alert("删除失败");
+            }
+        });
+    }
+}
+$(function(){
+    // 全选/反选
+    $("#checkAll").on("change", function(){
+        $(".rowCheck").prop("checked", this.checked);
+    });
+    $(document).on("change", ".rowCheck", function(){
+        var all = $(".rowCheck").length;
+        var checked = $(".rowCheck:checked").length;
+        $("#checkAll").prop("checked", all === checked);
+    });
+});
+</script>
 </head>
 <body>
 <div class="place"> <span>位置：</span>
@@ -33,7 +65,7 @@ List<Company> list  = (List<Company>)request.getAttribute("list");
   <table class="imgtable">
     <thead>
       <tr>
-        <th ><input name="" type="checkbox" value="" checked="checked"/></th>
+        <th ><input id="checkAll" type="checkbox" /></th>
         <th>企业名称</th>
         <th>企业所在地</th>
         <th>企业规模</th>
@@ -48,9 +80,13 @@ List<Company> list  = (List<Company>)request.getAttribute("list");
     <%
     if(list != null) {
     	for(Company c : list){
+        // 查询该企业下是否有职位
+        boolean hasJob = false;
+        com.qst.itoffer.dao.CompanyDAO companyDAO = new com.qst.itoffer.dao.CompanyDAO();
+        hasJob = companyDAO.hasJob(c.getCompanyId());
     %>
       <tr height="50px">
-        <td ><input name="" type="checkbox" value="" /></td>
+        <td ><input class="rowCheck" type="checkbox" value="<%=c.getCompanyId()%>" /></td>
         <td><%=c.getCompanyName() %></td>
         <td><%=c.getCompanyArea() %></td>
         <td><%=c.getCompanySize() %></td>
@@ -62,7 +98,13 @@ List<Company> list  = (List<Company>)request.getAttribute("list");
         <td><%=c.getCompanyViewnum() %></td>
         <td ><a href="CompanyServlet?type=updateSelect&companyId=<%=c.getCompanyId()%>" 
     class="tablelink">修改</a>
-         &nbsp;&nbsp;<a href="#" class="tablelink"> 删除</a></td>
+         &nbsp;&nbsp;
+         <% if(!hasJob) { %>
+             <a href="javascript:void(0);" class="tablelink" onclick="deleteCompany('<%=c.getCompanyId()%>', false)">删除</a>
+         <% } else { %>
+             <span style="color:gray;cursor:not-allowed;">删除</span>
+         <% } %>
+         </td>
       </tr>
     <%
     	} 
