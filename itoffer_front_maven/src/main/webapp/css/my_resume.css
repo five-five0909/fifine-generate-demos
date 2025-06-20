@@ -13,19 +13,19 @@
 .resume_title .btn{ background:url(../images/btn_Myoperate.png) no-repeat;cursor: pointer; width:64px; height:27px; text-align:center; color:#19A8B6; float:right; font-size:12px; font-weight:lighter; font-family:Geneva, Arial, Helvetica, sans-serif; margin-right:15px; margin-top:5px; line-height:27px} 
 .resume_title .btn:hover{ color: #0b828e;} 
 
-/*我的简历*/
-.user_operate{ width:996px; margin:0 auto; background:#fff; border:1px solid #ccc; border-bottom:2px solid #19A8B6}
-.user_operate li{ float:left; background:url(../images/user_line.png) no-repeat right center; height:41px; line-height:41px; }
-.user_operate li a{ font-size:14px; font-family:Geneva, Arial, Helvetica, sans-serif; color:#19A8B6;line-height:41px; display:block;padding-left:15px; padding-right:15px}
-.user_operate li a:hover{ background:#19A8B6;color:#fff;line-height:41px; display:block}
-.user_operate li a.active{ background:#19A8B6;color:#fff;line-height:41px; display:block}
-.user_operateAply{ float:right; }
-.user_operateAply a{font-size:14px; text-decoration:underline; color:#19A8B6;line-height:41px; padding-right:10px; font-family:Geneva, Arial, Helvetica, sans-serif}
-.rush_time{ text-align:right; color:#666; font-family:Geneva, Arial, Helvetica, sans-serif; font-size:12px}
-.resume_main{}
-.resume_left{width:700px;float:left; background:#fff;border-right:1px solid #ccc;}
-.resume_right{width:289px;float:left; background:#f8f8f8; padding:30px 10px 30px 0px;}
-.he{ height:8px; overflow:hidden}
+/*!*我的简历*!*/
+/*.user_operate{ width:996px; margin:0 auto; background:#fff; border:1px solid #ccc; border-bottom:2px solid #19A8B6}*/
+/*.user_operate li{ float:left; background:url(../images/user_line.png) no-repeat right center; height:41px; line-height:41px; }*/
+/*.user_operate li a{ font-size:14px; font-family:Geneva, Arial, Helvetica, sans-serif; color:#19A8B6;line-height:41px; display:block;padding-left:15px; padding-right:15px}*/
+/*.user_operate li a:hover{ background:#19A8B6;color:#fff;line-height:41px; display:block}*/
+/*.user_operate li a.active{ background:#19A8B6;color:#fff;line-height:41px; display:block}*/
+/*.user_operateAply{ float:right; }*/
+/*.user_operateAply a{font-size:14px; text-decoration:underline; color:#19A8B6;line-height:41px; padding-right:10px; font-family:Geneva, Arial, Helvetica, sans-serif}*/
+/*.rush_time{ text-align:right; color:#666; font-family:Geneva, Arial, Helvetica, sans-serif; font-size:12px}*/
+/*.resume_main{}*/
+/*.resume_left{width:700px;float:left; background:#fff;border-right:1px solid #ccc;}*/
+/*.resume_right{width:289px;float:left; background:#f8f8f8; padding:30px 10px 30px 0px;}*/
+/*.he{ height:8px; overflow:hidden}*/
 
 .uploade{background-color: #f8f8f8;
     border: 1px solid #eee;

@@ -26,7 +26,7 @@
 			<a href="register.jsp" target="_parent"><span class="type2">注册</span></a>
 		</c:if>
 		<c:if test="${sessionScope.applicantID!=null }">
-			<a href="JobApplyServlet?type=myapply" target="_parent"><span class="type1">个人中心</span></a>
+			<a href="ResumeServlet" target="_parent"><span class="type1">个人中心</span></a>
 			<a href="ApplicantLogoutServlet"><span class="type2">退出登录</span></a>
 		</c:if>
 		</div>
