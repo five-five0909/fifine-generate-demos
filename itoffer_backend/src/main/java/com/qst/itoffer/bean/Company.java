@@ -26,19 +26,19 @@ public class Company {
     // 宣传图片
     private String companyPic;
 
-    /**
-     * Default constructor.
-     */
-    public Enterprise() {}
+    public int getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(int companyId) {
+        this.companyId = companyId;
+    }
+
     /**
      * Default constructor.
      */
     public Company() {}
 
-    /**
-     * Constructor for creating a company with all fields except ID.
-     */
-    public Enterprise(String companyName, String companyArea, String companySize, String companyType, String companyBrief, int companyState, int companySort, int companyViewnum, String companyPic) {
     /**
      * Constructor for creating a company with all fields except ID.
      */
