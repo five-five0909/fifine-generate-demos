@@ -3,126 +3,129 @@ package com.qst.itoffer.bean;
 import java.sql.Timestamp;
 import java.util.Date;
 /**
- * 
+ * 职位实体类，包含职位详情、所属公司和招聘信息。
  */
 public class Job {
-	// 职位编号
+	// 职位ID
 	private int jobId;
-	// 所属企业
+	// 公司实体
 	private Company company;
 	// 职位名称
-	private String jobName;
+	private String jobTitle;
 	// 招聘人数
-	private int jobHiringnum;
-	// 职位薪资
+	private int jobCount;
+	// 薪资
 	private String jobSalary;
-	// 工作地区
-	private String jobArea;
+	// 工作地点
+	private String jobPlace;
 	// 职位描述
 	private String jobDesc;
-	// 结束日期
-	private Date jobEnddate;
-	// 招聘状态:1招聘中 2已暂停 3已结束
+	// 截止日期
+	private Date jobEndDate;
+	// 职位状态（1: 招聘中，2: 暂停，3: 关闭）
 	private int jobState;
-	// 职位申请人数
-	private int applyNum;
+	// 申请人数
+	private int applyCount;
 
-	public Job() {
-		super();
-	}
+	/**
+	 * 默认构造方法。
+	 */
+	public Job() {}
 
-	public Job(int jobId, Company company, String jobName, int jobHiringnum,
-			   String jobSalary, String jobArea, String jobDesc, Date jobEnddate,
-			   int jobState) {
-		super();
+	/**
+	 * 全字段构造方法。
+	 */
+	public Job(int jobId, Company company, String jobTitle, int jobCount, String jobSalary, String jobPlace, String jobDesc, Date jobEndDate, int jobState, int applyCount) {
 		this.jobId = jobId;
 		this.company = company;
-		this.jobName = jobName;
-		this.jobHiringnum = jobHiringnum;
+		this.jobTitle = jobTitle;
+		this.jobCount = jobCount;
 		this.jobSalary = jobSalary;
-		this.jobArea = jobArea;
+		this.jobPlace = jobPlace;
 		this.jobDesc = jobDesc;
-		this.jobEnddate = jobEnddate;
+		this.jobEndDate = jobEndDate;
 		this.jobState = jobState;
+		this.applyCount = applyCount;
 	}
 
-	public int getJobId() {
-		return jobId;
-	}
-
-	public void setJobId(int jobId) {
-		this.jobId = jobId;
-	}
-
-	public Company getCompany() {
-		return company;
-	}
-
-	public void setCompany(Company company) {
-		this.company = company;
-	}
-
-	public String getJobName() {
-		return jobName;
-	}
-
-	public void setJobName(String jobName) {
-		this.jobName = jobName;
-	}
-
-	public int getJobHiringnum() {
-		return jobHiringnum;
-	}
-
-	public void setJobHiringnum(int jobHiringnum) {
-		this.jobHiringnum = jobHiringnum;
-	}
-
-	public String getJobSalary() {
-		return jobSalary;
-	}
-
-	public void setJobSalary(String jobSalary) {
-		this.jobSalary = jobSalary;
-	}
-
-	public String getJobArea() {
-		return jobArea;
-	}
-
-	public void setJobArea(String jobArea) {
-		this.jobArea = jobArea;
-	}
-
-	public String getJobDesc() {
-		return jobDesc;
-	}
-
-	public void setJobDesc(String jobDesc) {
-		this.jobDesc = jobDesc;
-	}
-
-	public Timestamp getJobEnddate() {
-		return (Timestamp) jobEnddate;
-	}
-
-	public void setJobEnddate(Date jobEnddate) {
-		this.jobEnddate = jobEnddate;
-	}
-
-	public int getJobState() {
-		return jobState;
-	}
-
-	public void setJobState(int jobState) {
-		this.jobState = jobState;
-	}
-
-	public int getApplyNum() {
-		return applyNum;
-	}
-
-	public void setApplyNum(int applyNum) {
-		this.applyNum = applyNum;
-	}
+	/**
+	 * 获取职位ID。
+	 */
+	public int getJobId() { return jobId; }
+	/**
+	 * 设置职位ID。
+	 */
+	public void setJobId(int jobId) { this.jobId = jobId; }
+	/**
+	 * 获取公司实体。
+	 */
+	public Company getCompany() { return company; }
+	/**
+	 * 设置公司实体。
+	 */
+	public void setCompany(Company company) { this.company = company; }
+	/**
+	 * 获取职位名称。
+	 */
+	public String getJobTitle() { return jobTitle; }
+	/**
+	 * 设置职位名称。
+	 */
+	public void setJobTitle(String jobTitle) { this.jobTitle = jobTitle; }
+	/**
+	 * 获取招聘人数。
+	 */
+	public int getJobCount() { return jobCount; }
+	/**
+	 * 设置招聘人数。
+	 */
+	public void setJobCount(int jobCount) { this.jobCount = jobCount; }
+	/**
+	 * 获取薪资。
+	 */
+	public String getJobSalary() { return jobSalary; }
+	/**
+	 * 设置薪资。
+	 */
+	public void setJobSalary(String jobSalary) { this.jobSalary = jobSalary; }
+	/**
+	 * 获取工作地点。
+	 */
+	public String getJobPlace() { return jobPlace; }
+	/**
+	 * 设置工作地点。
+	 */
+	public void setJobPlace(String jobPlace) { this.jobPlace = jobPlace; }
+	/**
+	 * 获取职位描述。
+	 */
+	public String getJobDesc() { return jobDesc; }
+	/**
+	 * 设置职位描述。
+	 */
+	public void setJobDesc(String jobDesc) { this.jobDesc = jobDesc; }
+	/**
+	 * 获取截止日期。
+	 */
+	public Date getJobEndDate() { return jobEndDate; }
+	/**
+	 * 设置截止日期。
+	 */
+	public void setJobEndDate(Date jobEndDate) { this.jobEndDate = jobEndDate; }
+	/**
+	 * 获取职位状态。
+	 */
+	public int getJobState() { return jobState; }
+	/**
+	 * 设置职位状态。
+	 */
+	public void setJobState(int jobState) { this.jobState = jobState; }
+	/**
+	 * 获取申请人数。
+	 */
+	public int getApplyCount() { return applyCount; }
+	/**
+	 * 设置申请人数。
+	 */
+	public void setApplyCount(int applyCount) { this.applyCount = applyCount; }
 }
