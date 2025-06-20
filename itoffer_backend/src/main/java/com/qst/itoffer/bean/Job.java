@@ -3,7 +3,7 @@ package com.qst.itoffer.bean;
 import java.sql.Timestamp;
 
 /**
- * Job entity class representing job details, company information, and recruitment data.
+ * 
  */
 public class Job {
 	// Job ID
