@@ -67,7 +67,7 @@ public class JobServlet extends HttpServlet {
             // 修改职位（只允许招聘数、结束日期、招聘状态、companyId）
             int jobId = Integer.parseInt(request.getParameter("jobId"));
             String hiringnumStr = request.getParameter("jobHiringnum");
-            String enddateStr = request.getParameter("jobEnddate");
+            String enddateStr = request.getParameter("jobEndtime");
             String stateStr = request.getParameter("jobState");
             String companyIdStr = request.getParameter("companyId");
             if(hiringnumStr==null || enddateStr==null || stateStr==null || companyIdStr==null

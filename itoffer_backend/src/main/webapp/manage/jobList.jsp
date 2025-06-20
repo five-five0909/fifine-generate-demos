@@ -27,11 +27,11 @@ function deleteJob(jobId) {
         });
     }
 }
-function updateJobDialog(jobId, jobHiringnum, jobEnddate, jobState, companyId) {
+function updateJobDialog(jobId, jobHiringnum, jobEndtime, jobState, companyId) {
     var html = '<div id="updateJobDiv" style="background:#fff;padding:20px;border:1px solid #ccc;position:fixed;top:20%;left:40%;z-index:9999;">'
         + '<h3>修改职位</h3>'
         + '招聘数：<input id="editJobHiringnum" type="number" value="'+jobHiringnum+'"/><br/>'
-        + '结束日期：<input id="editJobEnddate" value="'+jobEnddate+'"/><br/>'
+        + '结束日期：<input id="editJobEndtime" value="'+jobEndtime+'"/><br/>'
         + '状态：<select id="editJobState">'
         + '<option value="1"'+(jobState==1?' selected':'')+'>招聘中</option>'
         + '<option value="2"'+(jobState==2?' selected':'')+'>已暂停</option>'
@@ -48,7 +48,7 @@ function submitUpdateJob(jobId) {
         type: "update",
         jobId: jobId,
         jobHiringnum: $("#editJobHiringnum").val(),
-        jobEnddate: $("#editJobEnddate").val(),
+        jobEndtime: $("#editJobEndtime").val(),
         jobState: $("#editJobState").val(),
         companyId: $("#editCompanyId").val()
     }, function(res) {
@@ -98,12 +98,12 @@ function submitUpdateJob(jobId) {
         <td>${job.company.companyName }</td>
         <td>${job.jobHiringnum }</td>
         <td>${job.applyNum }</td>
-        <td>${job.jobEnddate }</td>
+        <td>${job.jobEndtime }</td>
         <td><c:if test="${job.jobState == 1}">招聘中  </c:if>
         <c:if test="${job.jobState == 2}">已暂停</c:if>
         <c:if test="${job.jobState == 3}">已结束</c:if></td>
         <td >
-            <a href="javascript:void(0);" class="tablelink" onclick="updateJobDialog('${job.jobId}','${job.jobHiringnum}','${job.jobEnddate}','${job.jobState}','${job.company.companyId}')">修改</a> &nbsp;&nbsp;
+            <a href="javascript:void(0);" class="tablelink" onclick="updateJobDialog('${job.jobId}','${job.jobHiringnum}','${job.jobEndtime}','${job.jobState}','${job.company.companyId}')">修改</a> &nbsp;&nbsp;
             <c:choose>
                 <c:when test="${job.applyNum == 0}">
                     <a href="javascript:void(0);" class="tablelink" onclick="deleteJob('${job.jobId}')"> 删除</a>
