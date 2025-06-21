@@ -32,12 +32,15 @@ public class ApplicantAuthorityFilter implements Filter {
         // 判断被拦截的请求用户是否处于登录状态
         if (session.getAttribute("applicantID") == null) {
             // 获取被拦截的请求地址及参数
-            //String requestPath = req.getRequestURI();
-        	//获取请求之前的URL地址
-        	String requestPath=req.getHeader("Referer");
+            String requestURI = req.getRequestURI();
+            String queryString = req.getQueryString();
+            String requestPath = requestURI;
+            if (queryString != null && !queryString.isEmpty()) {
+                requestPath += "?" + queryString;
+            }
             // 将请求地址保存到request对象中转发到登录页面
             req.setAttribute("requestPath", requestPath);
-            request.getRequestDispatcher( "/login.jsp")
+            req.getRequestDispatcher("/login.jsp")
                     .forward(request, response);
             return;
         } else {

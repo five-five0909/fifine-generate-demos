@@ -37,6 +37,40 @@ public class JobApplyDAO {
 		
 	}
 
+    public boolean hasApplied(int applicantId, int jobId) {
+        String sql = "SELECT COUNT(*) FROM tb_jobapply WHERE applicant_id = ? AND job_id = ?";
+        try (Connection conn = DBUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, applicantId);
+            ps.setInt(2, jobId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public List<Integer> getAppliedJobIds(int applicantId) {
+        List<Integer> appliedJobIds = new ArrayList<>();
+        String sql = "SELECT job_id FROM tb_jobapply WHERE applicant_id = ?";
+        try (Connection conn = DBUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, applicantId);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    appliedJobIds.add(rs.getInt("job_id"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return appliedJobIds;
+    }
+
 	public List<JobApply> getJobApplyList(int applicantId) {
 		List<JobApply> list = new ArrayList<JobApply>();
         Connection conn = DBUtil.getConnection();

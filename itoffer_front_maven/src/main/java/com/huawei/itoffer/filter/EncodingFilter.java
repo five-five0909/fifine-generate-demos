@@ -20,11 +20,14 @@ public class EncodingFilter implements Filter {
             throws IOException, ServletException {
         // 设置请求编码
         request.setCharacterEncoding(encoding);
-        // 设置响应编码
-        response.setContentType("text/html;charset=" + encoding);
-        
+
         // 将请求传递给下一个过滤器或目标资源
         chain.doFilter(request, response);
+
+        // 只对动态内容设置响应编码
+        if (response.getContentType() != null && response.getContentType().startsWith("text/html")) {
+            response.setContentType("text/html;charset=" + encoding);
+        }
     }
 
     @Override

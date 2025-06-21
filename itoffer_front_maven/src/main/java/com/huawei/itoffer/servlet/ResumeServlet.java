@@ -73,7 +73,26 @@ public class ResumeServlet extends HttpServlet {
                 info.setHeadShot(fileName);
                 basicInfoDAO.update(info);
             }
-            resp.sendRedirect("ResumeServlet?iframe=resume");
+            resp.sendRedirect("mycenter.jsp");
+            return;
+        }
+        if ("uploadAttachment".equals(action)) {
+            // 1. 处理附件文件上传
+            Part filePart = req.getPart("attachmentFile");
+            String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+            // 2. 保存到服务器目录
+            String uploadDir = req.getServletContext().getRealPath("/uploads/attachments/");
+            File dir = new File(uploadDir);
+            if (!dir.exists()) dir.mkdirs();
+            String savePath = uploadDir + File.separator + fileName;
+            filePart.write(savePath);
+            // 3. 更新数据库
+            Attachment att = new Attachment();
+            att.setApplicantId(applicantId);
+            att.setFileName(fileName);
+            att.setFilePath("uploads/attachments/" + fileName);
+            attachmentDAO.insert(att);
+            resp.sendRedirect("mycenter.jsp");
             return;
         }
         if ("saveBasicInfo".equals(action)) {
@@ -127,6 +146,6 @@ public class ResumeServlet extends HttpServlet {
             int attachmentId = Integer.parseInt(req.getParameter("attachmentId"));
             attachmentDAO.delete(attachmentId);
         }
-        resp.sendRedirect("ResumeServlet?iframe=resume");
+        resp.sendRedirect("mycenter.jsp");
     }
 } 

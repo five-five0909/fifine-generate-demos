@@ -27,13 +27,13 @@ public class ApplicantRegisterServlet extends HttpServlet{
         
             out.print("<script type='text/javascript'>");
             out.print("alert('邮箱已被注册，请重新输入！');");
-            out.print("window.location='register.jsp';");
+            out.print("window.location.href='" + request.getContextPath() + "/register.jsp';");
             out.print("</script>");
         }else{
             
             dao.save(email,password);
            
-            out.print("<script>alert('注册成功');window.location.href='login.jsp';</script>");
+            out.print("<script>alert('注册成功');window.location.href='" + request.getContextPath() + "/login.jsp';</script>");
         }
 
 		

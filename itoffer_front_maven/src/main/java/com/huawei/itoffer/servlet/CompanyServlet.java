@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.huawei.itoffer.bean.Company;
 import com.huawei.itoffer.bean.Job;
 import com.huawei.itoffer.dao.CompanyDAO;
+import com.huawei.itoffer.dao.JobApplyDAO;
 import com.huawei.itoffer.dao.JobDAO;
 
 /**
@@ -38,8 +39,17 @@ public class CompanyServlet extends HttpServlet {
             List<Job> jobList = jobdao.getJobListByCompanyID(companyID);
             // 将查询到的职位列表存入request请求域
             request.setAttribute("joblist", jobList);
+
+            // 检查用户是否登录，如果登录了，就查询其已投递的职位ID
+            Integer applicantId = (Integer) request.getSession().getAttribute("applicantID");
+            if (applicantId != null) {
+                JobApplyDAO jobApplyDao = new JobApplyDAO();
+                List<Integer> appliedJobIds = jobApplyDao.getAppliedJobIds(applicantId);
+                request.setAttribute("appliedJobIds", appliedJobIds);
+            }
+
             // 请求转发
-            request.getRequestDispatcher("recruit/company.jsp")
+            request.getRequestDispatcher("/recruit/company.jsp")
                         .forward(request,response);
         }
 	}

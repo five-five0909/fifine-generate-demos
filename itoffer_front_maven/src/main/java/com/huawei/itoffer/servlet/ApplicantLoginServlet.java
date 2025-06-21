@@ -49,7 +49,7 @@ public class ApplicantLoginServlet extends HttpServlet {
 			
 			out.print("<script type='text/javascript'>");
 			out.print("alert('用户名或密码错误，请重新输入！');");
-			out.print("window.location='login.jsp';");
+			out.print("window.location.href='" + request.getContextPath() + "/login.jsp';");
 			out.print("</script>");
 		}
 	}

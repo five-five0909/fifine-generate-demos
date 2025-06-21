@@ -1,0 +1,277 @@
+/*查看简历*/
+/*.resume_con{ width:1000px; margin:0 auto}*/
+/*.status{ border:1px solid #ddd; background:#fff; padding:20px; margin-bottom:20px}*/
+/*.pingyu{ background:url(../images/left_line.png) left center no-repeat; padding-left:20px; color:#19A8B6; margin-left:20px}*/
+/*.all_resume{ background:#fff; padding:20px; }*/
+/*.all_resume img{ border:1px solid #ccc}*/
+/*.person_name{ font-size:18px;}*/
+/*.all_resume p{ line-height:22px;font-family:Geneva, Arial, Helvetica, sans-serif; font-size:12px; color:#666}*/
+/*.resume_title{ background:url(../images/resume_titBj.png); height:39px; line-height:39px; padding-left:30px; font-size:14px; font-weight:bold; color:#666}*/
+/*.resume_title .btn{ background:url(../images/btn_Myoperate.png) no-repeat; width:64px; height:27px; text-align:center; color:#19A8B6; float:right; font-size:12px; font-weight:lighter; font-family:Geneva, Arial, Helvetica, sans-serif; margin-right:15px; margin-top:5px; line-height:27px}*/
+
+/*自己写的*/
+/* resume.css - 简历页面专属样式 */
+
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.resume-container {
+    margin: 20px auto;
+    width: 990px;
+}
+
+.resume-nav {
+    border-bottom: 2px solid #1faebc;
+    margin-bottom: 0;
+    padding-left: 10px;
+}
+
+.resume-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.resume-nav li {
+    display: inline-block;
+    margin-bottom: -2px; /* 关键：让 active 的边框和 resume-nav 的边框重合 */
+}
+
+.resume-nav li a {
+    display: block;
+    padding: 8px 25px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+    border: 2px solid transparent;
+    border-bottom: none;
+}
+
+.resume-nav li.active a {
+    background-color: #1faebc;
+    color: #fff;
+    border-color: #1faebc;
+    border-radius: 6px 6px 0 0;
+}
+
+.resume-body {
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-top: none;
+    padding: 20px;
+}
+
+.resume-left {
+    float: left;
+    width: 680px;
+}
+
+.resume-right {
+    float: right;
+    width: 240px;
+}
+
+.resume-section {
+    border-bottom: 1px solid #f2f2f2;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.resume-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.section-header {
+    position: relative;
+    margin-bottom: 20px;
+    height: 25px;
+    line-height: 25px;
+}
+
+.section-header h3 {
+    font-size: 16px;
+    color: #333;
+    border-left: 3px solid #1faebc;
+    padding-left: 10px;
+    font-weight: normal;
+    float: left;
+}
+
+.section-header .add-btn {
+    float: right;
+    color: #1faebc;
+    text-decoration: none;
+    font-size: 14px;
+}
+.section-header .add-btn:hover {
+    text-decoration: underline;
+}
+
+.profile-pic {
+    float: right;
+    width: 130px;
+    text-align: center;
+}
+
+.profile-pic .pic-box {
+    width: 120px;
+    height: 120px;
+    border: 1px solid #e5e5e5;
+    background: #f7f7f7 url(../images/profile_placeholder.png) no-repeat center center; /* 引用占位图 */
+    padding: 4px;
+    margin: 0 auto 10px auto;
+}
+
+.profile-pic a {
+    color: #1faebc;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.info-fields {
+    float: left;
+    width: 520px;
+}
+
+.info-row {
+    background: #f7f7f7;
+    border: 1px solid #e5e5e5;
+    padding: 8px 12px;
+    margin-bottom: 10px;
+    color: #666;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data-table th {
+    text-align: left;
+    font-weight: normal;
+    color: #999;
+    padding: 8px;
+}
+
+.attachment-placeholder {
+    padding: 30px;
+    text-align: center;
+    color: #999;
+}
+
+/* --- 右侧栏样式 --- */
+.action-box {
+    border: 1px solid #e5e5e5;
+    padding: 15px;
+    background: #fbfbfb;
+}
+
+.action-btn {
+    display: block;
+    text-align: center;
+    padding: 10px 0;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 14px;
+}
+
+.btn-preview {
+    background: #1faebc;
+}
+.btn-preview:before {
+    content: " ";
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    margin-right: 8px;
+    background: url(../images/icon_preview.png) no-repeat center center; /* 需要一个预览图标 */
+}
+
+.btn-save {
+    background: #f5f5f5;
+    color: #666;
+    border: 1px solid #ddd;
+}
+.btn-save:before {
+    content: " ";
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    margin-right: 8px;
+    background: url(../images/icon_save.png) no-repeat center center; /* 需要一个保存图标 */
+}
+
+.completeness {
+    margin-bottom: 15px;
+}
+.completeness p {
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.progress-bar-bg {
+    height: 8px;
+    background: #e5e5e5;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.progress-bar-fg {
+    height: 100%;
+    background: #1faebc;
+    border-radius: 4px;
+}
+
+.checklist {
+    list-style: none;
+    padding: 0 0 10px 0;
+    margin: 0;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.checklist li {
+    padding: 6px 0;
+    color: #666;
+}
+
+.checklist .icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.checklist li.completed .icon {
+    background: url(../images/icon_check.png) no-repeat center center; /* 需要一个已完成图标 */
+}
+
+.checklist li.incomplete .icon {
+    background: url(../images/icon_arrow.png) no-repeat center center; /* 需要一个未完成图标 */
+}
+
+.legend {
+    padding-top: 10px;
+    font-size: 12px;
+    color: #999;
+}
+
+.legend span {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    margin-right: 4px;
+}
+.legend .legend-completed {
+    color: #1faebc;
+}
+.legend .legend-incomplete {
+    color: #999;
+}

@@ -39,6 +39,15 @@ public class JobServlet extends HttpServlet {
 			request.setAttribute("job", job);
 			// 将企业信息对象存入request对象
 			request.setAttribute("company", job.getCompany());
+			
+			// 检查用户是否登录，如果登录了，就查询其已投递的职位ID
+			Integer applicantId = (Integer) request.getSession().getAttribute("applicantID");
+			if (applicantId != null) {
+				JobApplyDAO jobApplyDao = new JobApplyDAO();
+				List<Integer> appliedJobIds = jobApplyDao.getAppliedJobIds(applicantId);
+				request.setAttribute("appliedJobIds", appliedJobIds);
+			}
+
 			request.getRequestDispatcher("recruit/job.jsp").forward(request, response);
 		}
 		if ("delete".equals(type)) {
