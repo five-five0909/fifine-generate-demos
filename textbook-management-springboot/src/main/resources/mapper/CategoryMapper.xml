@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.dao.CategoryDao">
+
+    <!-- 结果映射 -->
+    <resultMap id="CategoryResultMap" type="com.example.entity.Category">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="description" property="description"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <!-- 查询所有分类 -->
+    <select id="selectAll" resultMap="CategoryResultMap">
+        SELECT * FROM category ORDER BY create_time DESC
+    </select>
+
+    <!-- 根据ID查询分类 -->
+    <select id="selectById" parameterType="java.lang.Integer" resultMap="CategoryResultMap">
+        SELECT * FROM category WHERE id = #{id}
+    </select>
+
+    <!-- 添加分类 -->
+    <insert id="insert" parameterType="com.example.entity.Category" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO category (name, description, create_time, update_time)
+        VALUES (#{name}, #{description}, NOW(), NOW())
+    </insert>
+
+    <!-- 更新分类 -->
+    <update id="update" parameterType="com.example.entity.Category">
+        UPDATE category
+        SET name = #{name},
+            description = #{description},
+            update_time = NOW()
+        WHERE id = #{id}
+    </update>
+
+    <!-- 删除分类 -->
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        DELETE FROM category WHERE id = #{id}
+    </delete>
+
+    <!-- 根据名称查询分类 -->
+    <select id="selectByName" parameterType="java.lang.String" resultMap="CategoryResultMap">
+        SELECT * FROM category WHERE name = #{name}
+    </select>
+
+</mapper> 

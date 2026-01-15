@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.dao.TextbookDao">
+
+    <!-- 结果映射 -->
+    <resultMap id="TextbookResultMap" type="com.example.entity.Textbook">
+        <id column="id" property="id"/>
+        <result column="isbn" property="isbn"/>
+        <result column="title" property="title"/>
+        <result column="author" property="author"/>
+        <result column="publisher" property="publisher"/>
+        <result column="publish_date" property="publishDate"/>
+        <result column="category_id" property="categoryId"/>
+        <result column="category_name" property="categoryName"/>
+        <result column="price" property="price"/>
+        <result column="stock" property="stock"/>
+        <result column="description" property="description"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <!-- 查询所有教材 -->
+    <select id="selectAll" resultMap="TextbookResultMap">
+        SELECT t.*, c.name AS category_name
+        FROM textbook t
+        LEFT JOIN category c ON t.category_id = c.id
+        ORDER BY t.create_time DESC
+    </select>
+
+    <!-- 根据ID查询教材 -->
+    <select id="selectById" parameterType="java.lang.Integer" resultMap="TextbookResultMap">
+        SELECT t.*, c.name AS category_name
+        FROM textbook t
+        LEFT JOIN category c ON t.category_id = c.id
+        WHERE t.id = #{id}
+    </select>
+
+    <!-- 根据条件查询教材 -->
+    <select id="selectByCondition" resultMap="TextbookResultMap">
+        SELECT t.*, c.name AS category_name
+        FROM textbook t
+        LEFT JOIN category c ON t.category_id = c.id
+        <where>
+            <if test="title != null and title != ''">
+                AND t.title LIKE CONCAT('%', #{title}, '%')
+            </if>
+            <if test="author != null and author != ''">
+                AND t.author LIKE CONCAT('%', #{author}, '%')
+            </if>
+            <if test="categoryId != null">
+                AND t.category_id = #{categoryId}
+            </if>
+        </where>
+        ORDER BY t.create_time DESC
+    </select>
+
+    <!-- 添加教材 -->
+    <insert id="insert" parameterType="com.example.entity.Textbook" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO textbook (isbn, title, author, publisher, publish_date, category_id, price, stock, description, create_time, update_time)
+        VALUES (#{isbn}, #{title}, #{author}, #{publisher}, #{publishDate}, #{categoryId}, #{price}, #{stock}, #{description}, NOW(), NOW())
+    </insert>
+
+    <!-- 更新教材 -->
+    <update id="update" parameterType="com.example.entity.Textbook">
+        UPDATE textbook
+        SET isbn = #{isbn},
+            title = #{title},
+            author = #{author},
+            publisher = #{publisher},
+            publish_date = #{publishDate},
+            category_id = #{categoryId},
+            price = #{price},
+            stock = #{stock},
+            description = #{description},
+            update_time = NOW()
+        WHERE id = #{id}
+    </update>
+
+    <!-- 删除教材 -->
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        DELETE FROM textbook WHERE id = #{id}
+    </delete>
+
+    <!-- 更新库存 -->
+    <update id="updateStock">
+        UPDATE textbook SET stock = #{stock}, update_time = NOW() WHERE id = #{id}
+    </update>
+
+    <!-- 统计教材总数 -->
+    <select id="count" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM textbook
+    </select>
+
+    <!-- 分页查询 -->
+    <select id="selectByPage" resultMap="TextbookResultMap">
+        SELECT t.*, c.name AS category_name
+        FROM textbook t
+        LEFT JOIN category c ON t.category_id = c.id
+        ORDER BY t.create_time DESC
+        LIMIT #{offset}, #{limit}
+    </select>
+
+</mapper> 
